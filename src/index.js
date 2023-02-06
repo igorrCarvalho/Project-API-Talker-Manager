@@ -1,4 +1,5 @@
 const express = require('express');
+const { getTalkers } = require('./utils/utilsFunctions');
 
 const app = express();
 app.use(express.json());
@@ -16,3 +17,10 @@ app.listen(PORT, () => {
 });
 
 // Starting
+
+app.get('/talker', async (req, res) => {
+  const talkers = await getTalkers();
+  if (!talkers) return res.status(200).json([]);
+
+  res.status(200).json(talkers);
+});
