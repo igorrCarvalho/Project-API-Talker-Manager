@@ -1,5 +1,5 @@
 const express = require('express');
-const { getTalkers } = require('./utils/utilsFunctions');
+const { getTalkers, getATalker } = require('./utils/utilsFunctions');
 
 const app = express();
 app.use(express.json());
@@ -23,4 +23,14 @@ app.get('/talker', async (req, res) => {
   if (!talkers) return res.status(200).json([]);
 
   res.status(200).json(talkers);
+});
+
+app.get('/talker/:id', async (req, res) => {
+  const { id } = req.params;
+  const allTalkers = await getTalkers();
+  const choosedTalker = getATalker(id, allTalkers);
+  if(!choosedTalker) {
+    return res.status(404).json({ message: 'Pessoa palestrante não encontrada' });
+  }
+  res.status(200).json(choosedTalker);
 });
