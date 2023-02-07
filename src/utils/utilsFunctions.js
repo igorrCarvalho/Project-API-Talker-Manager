@@ -36,6 +36,13 @@ const updateTalker = async (id, newTalker) => {
   return talkerUpdated;
 };
 
+const deleteTalker = async (id) => {
+  const numberId = Number(id);
+  const allTalkers = await getTalkers();
+  const newTalkers = allTalkers.filter((obj) => Number(obj.id) !== numberId);
+  await fs.writeFile('src/talker.json', JSON.stringify(newTalkers));
+};
+
 module.exports = {
   getTalkers,
   getATalker,
@@ -43,4 +50,5 @@ module.exports = {
   insertTalker,
   getNextTalkerId,
   updateTalker,
+  deleteTalker,
 };

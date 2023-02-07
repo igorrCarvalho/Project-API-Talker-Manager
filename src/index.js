@@ -6,6 +6,7 @@ const {
   insertTalker,
   getNextTalkerId,
   updateTalker,
+  deleteTalker,
 } = require('./utils/utilsFunctions');
 
 const { validateEmail, validatePass } = require('./utils/middlewares/validateLogin');
@@ -86,4 +87,10 @@ async (req, res) => {
   const updater = req.body;
   const updateArray = await updateTalker(numberId, updater);
   res.status(200).json(updateArray);
+});
+
+app.delete('/talker/:id', validateToken, async (req, res) => {
+  const { id } = req.params;
+  await deleteTalker(id);
+  res.status(204).json({});
 });
