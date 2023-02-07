@@ -26,10 +26,21 @@ const getNextTalkerId = async () => {
   return newId;
 };
 
+const updateTalker = async (id, newTalker) => {
+  const talkers = await getTalkers();
+  const equalTalkers = talkers.filter((obj) => Number(obj.id) !== Number(id));
+  const talkerUpdated = { id, ...newTalker };
+  const newTalkers = [...equalTalkers, talkerUpdated];
+  const sortedTalkers = newTalkers.sort((a, b) => Number(a.id) - Number(b.id));
+  await fs.writeFile('src/talker.json', JSON.stringify(sortedTalkers));
+  return talkerUpdated;
+};
+
 module.exports = {
   getTalkers,
   getATalker,
   generateToken,
   insertTalker,
   getNextTalkerId,
+  updateTalker,
 };

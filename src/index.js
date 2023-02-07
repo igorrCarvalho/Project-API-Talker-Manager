@@ -5,6 +5,7 @@ const {
   generateToken,
   insertTalker,
   getNextTalkerId,
+  updateTalker,
 } = require('./utils/utilsFunctions');
 
 const { validateEmail, validatePass } = require('./utils/middlewares/validateLogin');
@@ -70,4 +71,19 @@ async (req, res) => {
   const talkerWithId = { id, ...newTalker };
   await insertTalker(talkerWithId);
   res.status(201).json(talkerWithId);
+});
+
+app.put('/talker/:id',
+validateToken,
+validateName,
+validateAge,
+validateTalk,
+validateTalkDate,
+validateTalkRate,
+async (req, res) => {
+  const { id } = req.params;
+  const numberId = Number(id);
+  const updater = req.body;
+  const updateArray = await updateTalker(numberId, updater);
+  res.status(200).json(updateArray);
 });
