@@ -7,6 +7,7 @@ const {
   getNextTalkerId,
   updateTalker,
   deleteTalker,
+  searchTalkerByName,
 } = require('./utils/utilsFunctions');
 
 const { validateEmail, validatePass } = require('./utils/middlewares/validateLogin');
@@ -36,6 +37,12 @@ app.listen(PORT, () => {
 });
 
 // Starting
+
+app.get('/talker/search', validateToken, async (req, res) => {
+  const query = req.query.q;
+  const search = await searchTalkerByName(query);
+  res.status(200).json(search);
+});
 
 app.get('/talker', async (req, res) => {
   const talkers = await getTalkers();

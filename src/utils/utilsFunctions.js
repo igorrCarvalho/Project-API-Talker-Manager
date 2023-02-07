@@ -43,6 +43,15 @@ const deleteTalker = async (id) => {
   await fs.writeFile('src/talker.json', JSON.stringify(newTalkers));
 };
 
+const searchTalkerByName = async (term) => {
+  const allTalkers = await getTalkers();
+  if (!term) return allTalkers;
+  const filteredTalkers = allTalkers.filter((obj) => (
+    obj.name.toLowerCase().includes(term.toLowerCase())
+  ));
+  return filteredTalkers;
+};
+
 module.exports = {
   getTalkers,
   getATalker,
@@ -51,4 +60,5 @@ module.exports = {
   getNextTalkerId,
   updateTalker,
   deleteTalker,
+  searchTalkerByName,
 };
