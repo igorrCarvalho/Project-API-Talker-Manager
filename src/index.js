@@ -1,6 +1,22 @@
 const express = require('express');
-const { getTalkers, getATalker, generateToken } = require('./utils/utilsFunctions');
+const {
+  getTalkers,
+  getATalker,
+  generateToken,
+  insertTalker,
+  getNextTalkerId,
+} = require('./utils/utilsFunctions');
+
 const { validateEmail, validatePass } = require('./utils/middlewares/validateLogin');
+
+const {
+  validateToken,
+  validateName,
+  validateAge,
+  validateTalk,
+  validateTalkDate,
+  validateTalkRate,
+} = require('./utils/middlewares/validateAddTalker');
 
 const app = express();
 app.use(express.json());
@@ -39,4 +55,19 @@ app.get('/talker/:id', async (req, res) => {
 app.post('/login', validateEmail, validatePass, (req, res) => {
   const token = generateToken();
   res.status(200).json({ token });
+});
+
+app.post('/talker',
+validateToken,
+validateName,
+validateAge,
+validateTalk,
+validateTalkDate,
+validateTalkRate,
+async (req, res) => {
+  const newTalker = req.body;
+  const id = await getNextTalkerId();
+  const talkerWithId = { id, ...newTalker };
+  await insertTalker(talkerWithId);
+  res.status(201).json(talkerWithId);
 });

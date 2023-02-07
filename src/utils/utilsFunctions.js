@@ -13,8 +13,23 @@ const getATalker = (id, array) => {
 
 const generateToken = () => crypto.randomBytes(8).toString('hex');
 
+const insertTalker = async (talker) => {
+  const oldTalkers = await getTalkers();
+  oldTalkers.push(talker);
+  return fs.writeFile('src/talker.json', JSON.stringify(oldTalkers));
+};
+
+const getNextTalkerId = async () => {
+  const talkers = await getTalkers();
+  const lastId = talkers[talkers.length - 1].id;
+  const newId = Number(lastId) + 1;
+  return newId;
+};
+
 module.exports = {
   getTalkers,
   getATalker,
   generateToken,
+  insertTalker,
+  getNextTalkerId,
 };
