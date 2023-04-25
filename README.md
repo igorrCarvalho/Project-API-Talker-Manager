@@ -130,4 +130,16 @@ This project was developed by [Igor Carvalho](https://www.linkedin.com/in/dev-ig
 
 </details>
 
+
+<details>
+  <summary><strong>GET /talker/search?q=searchTerm</strong></summary><br />
+
+  This is an get http endpoint, that will show you talkers with the name used in the query (placed after '=').<br /><br />
+
+  If the name exists the talkers are shown, with an status 200<br /><br />
+  
+  You can use it with Thunder-Client or your browser, generally the endpoint will be:<br /><br />
+  `localhost:3000/talker/search?q=searchTerm`
+
+</details>
 </details>
