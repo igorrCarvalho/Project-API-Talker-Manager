@@ -1,6 +1,8 @@
 # Welcome to the project API Talker Manager repositorie!
 
-This project was made using the TDD (Test Driven Development) method. It simulates a control backend program to an talker website. It has many API endpoints, you can test it using VsCode extensions like 'Thunder-Client', or in the browser. This project use an simulated database, which is the talker.json file.
+This project was made using the TDD (Test Driven Development) method. It simulates a control backend program to an talker website. It has many API endpoints, you can test it using VsCode extensions like 'Thunder-Client', or in the browser. This project use an simulated database, which is the talker.json file. <br />
+<br />
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/64559670/236532711-48385a3b-0c7e-4d83-ace9-f20cca8e124b.gif)
 
 # Development
 
